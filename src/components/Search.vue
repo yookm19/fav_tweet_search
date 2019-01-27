@@ -3,19 +3,14 @@
         <div class="image"><img :src="user.photoURL"></div>
         <h1>{{ user.displayName }}さんが最近いいねしたツイートを探します</h1>
         <span>{{ user.displayName }}さんの</span>
-        <button v-on:click="search">いいねサーチ</button>
-        <!-- <p>
-            <input type="text" v-model="keyword">
-        </p>
+        <button v-on:click="searchTweet">いいねサーチ</button>
         <p>
-          {{message}}
+            <ul>
+                <li v-for="tweet in tweets">
+                    {{ tweet }}
+                </li>
+            </ul>
         </p>
-        <ul>
-          <li v-for="item in items"> -->
-            <!-- {{item.title}} -->
-            <!-- <a v-bind:href="item.url" target="_blank">{{item.title}}</a> likes:{{item.likes_count}}
-          </li>
-        </ul> -->
         <p>
             <button v-on:click="logout">ログアウト</button>
         </p>
@@ -29,33 +24,32 @@ export default{
     data(){
         return{
             message:'',
-            keyword:"Javascript"
+            keyword:"Javascript",
+            tweets:null
         };
     },
     methods:{
         logout:function(){
             firebase.auth().signOut();
         },
-        search:function(){
-        //     var vm=this
-        //     var params={user_id:"@yesmisteryesman",count:20}
-        //     axios.get('https://api.twitter.com/1.1/favorites/list')
-        //     .then(function(response){
-        //         console.log(response)
-        //         //vm.items=response.data
-        //     })
-        //     .catch(function(error){
-        //         vm.message='Error!' + error
-        //     })
-        //     .finally(function(){
-        //         vm.message=''
-        //     })
-
-            client.get('statuses/home_timeline.json',params,(error,tweets,response)=>{
-            if(!error){
-                console.log(tweets)
-            }
-        })
+        searchTweet:function(){
+            console.log(this.user.providerData[0].uid)
+            // サーバーサイドにアクセスしてツイートを取得する。
+            // ここのサーバーサイド呼び出し時にエラーが発生している。
+            const path = 'http://127.0.0.1:5000/'
+            axios.get(path)
+                .then(function(response){
+                    console.log(response)
+                    this.tweets = response.data
+                })
+                .catch(function(error){
+                    // ↓のコメントに見える一行は、コメントではないらしいので削除しない。
+                    // eslint-disable-next-line
+                    console.log(error)
+                })
+                .finally(function(){
+                    // なんか書く
+                })
         }
     }
 };

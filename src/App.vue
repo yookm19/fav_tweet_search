@@ -20,8 +20,6 @@ export default {
   created:function(){
     firebase.auth().onAuthStateChanged(user => {
       console.log(user);
-      console.log(user.photoURL)
-      console.log(user.providerId)
     if(user){
       this.isLogin = true;
       this.userData = user;
