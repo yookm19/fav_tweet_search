@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>fav-tweet-search</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAAaYBAX4F814If8jXYgoU4l3wAfy5bCFw",
+        authDomain: "fav-tweet-search.firebaseapp.com",
+        databaseURL: "https://fav-tweet-search.firebaseio.com",
+        projectId: "fav-tweet-search",
+        storageBucket: "fav-tweet-search.appspot.com",
+        messagingSenderId: "476967260977"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="./build.js"></script>
+    <script>
+        const Twitter = require("Twitter")
+
+        const consumer_key = "ASWHVhMdDeUoDxEzeSmfgwuVq"
+        const consumer_secret = "hq1bmBt3vj6QjRhQcchhyoULGQZlrjIC05OUkJyzShRdYZXe4q"
+        const access_token_key = "1425393612-zyLd1547ITxVws3dX5qOnhxIuJEntUpBKyHes01"
+        const access_token_secret = "dOHqq0pjBbGzDfKjisyIKZUq44WESODkeeo3GZIj080IL"
+
+        const client = new Twitter({
+            consumer_key,
+            consumer_secret,
+            access_token_key,
+            access_token_secret
+        })
+
+        const params = {count:50}
+
+    </script>
+  </body>
+</html>
