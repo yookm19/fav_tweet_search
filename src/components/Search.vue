@@ -36,16 +36,19 @@ export default{
             // サーバーサイドにアクセスしてツイートを取得する。
             // ここのサーバーサイド呼び出し時にエラーが発生している。
             const path = 'http://127.0.0.1:5000/'
+            // const path = '/flask_get_favorites/get_favorites.py'
             var param = this.user.providerData[0].uid
             console.log(param)
-            axios.get(path,{
-                params:{
-                    uid:this.user.providerData[0].uid
+            axios.get(path,
+                {
+                    params:{
+                        uid:this.user.providerData[0].uid
+                    }
                 }
-            })
+            )
                 .then(function(response){
                     console.log(response)
-                    this.tweets = response.data
+                    // this.tweets = response.data
                 })
                 .catch(function(error){
                     // ↓のコメントに見える一行は、コメントではないらしいので削除しない。
