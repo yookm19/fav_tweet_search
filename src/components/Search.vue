@@ -33,11 +33,16 @@ export default{
             firebase.auth().signOut();
         },
         searchTweet:function(){
-            console.log(this.user.providerData[0].uid)
             // サーバーサイドにアクセスしてツイートを取得する。
             // ここのサーバーサイド呼び出し時にエラーが発生している。
             const path = 'http://127.0.0.1:5000/'
-            axios.get(path)
+            var param = this.user.providerData[0].uid
+            console.log(param)
+            axios.get(path,{
+                params:{
+                    uid:this.user.providerData[0].uid
+                }
+            })
                 .then(function(response){
                     console.log(response)
                     this.tweets = response.data
