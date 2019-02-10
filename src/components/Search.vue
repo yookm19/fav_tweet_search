@@ -4,18 +4,20 @@
         <h1>{{ user.displayName }}さんが最近いいねしたツイートを探します</h1>
         <span>{{ user.displayName }}さんの</span>
         <button v-on:click="searchTweet">いいねサーチ</button>
-        <p>{{tweets}}
-            <!-- <ul>
+        <p>{{ tweets }}
+            <ul>
                 <li v-for="tweet in tweets">
                     {{ tweet }}
                 </li>
-            </ul> -->
+            </ul>
         </p>
         <p>
             <button v-on:click="logout">ログアウト</button>
         </p>
     </div>
 </template>
+<style>
+</style>
 
 <script>
 import Timeline from 'vue-tweet-embed'
@@ -45,7 +47,8 @@ export default{
             axios.get(path,
                     {
                         params:{
-                            uid:this.user.providerData[0].uid
+                            uid:this.user.providerData[0].uid,
+                            count:200
                         }
                     }
                 )
