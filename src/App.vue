@@ -62,5 +62,6 @@ li {
 
 a {
   color: #42b983;
+  text-align: left;
 }
 </style>
