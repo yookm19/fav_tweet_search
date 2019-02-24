@@ -44,6 +44,21 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+} 
+
+.image{
+  width:10%;
+  height:10%;
+}
+
+.count{
+  text-align:left;
+  padding:10px 10px 0px 50px;
+  position:relative;
+}
+
+[v-cloak]{
+  display:none;
 }
 
 h1, h2 {
@@ -52,18 +67,41 @@ h1, h2 {
 
 ul {
   list-style-type: none;
+  text-align:left;
+  position:relative;
 }
 
 li {
-  display: inline-block;
+  display: block;
   margin: 0 10px;
-  text-align:left;
-  padding-left:10px;
+  padding:10px 10px 0px 0px;
+  background: #f1f8ff;
+  border-bottom: solid 2px #dadada;
+  border-left: solid 6px #2d8fdd;
+  margin-bottom: 3px;
+  line-height: 1.5;
+  padding: 0.5em;
+  border-radius: 0 15px 15px 0;
 }
 
 a {
   color: #42b983;
-  text-align: left;
-  padding-left:10px;
 }
+
+button {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #f1f8ff;/*ボタン色*/
+  color: #000000;
+  border-bottom: solid 4px #627295;
+  border-radius: 15px 15px 15px 15px;
+}
+button:active {
+  /*ボタンを押したとき*/
+  -webkit-transform: translateY(4px);
+  transform: translateY(4px);/*下に動く*/
+  border-bottom: none;/*線を消す*/
+}
+
 </style>

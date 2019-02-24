@@ -1,21 +1,20 @@
 <template>
     <div id="search">
-        <div class="image"><img :src="user.photoURL"></div>
+        <p><img :src="user.photoURL" class="image"></p>
         <h1>{{ user.displayName }}さんが最近いいねしたツイートを探します</h1>
         <span>{{ user.displayName }}さんの</span>
         <button v-on:click="searchTweet">いいねサーチ</button>
         <input type="text" v-model="keyword">
-        <p>
-            <ul>
-                <li v-for="searchTweet in searchTweets">
-                    <a>{{ searchTweet }}</a>
-                    <!-- <pre>{{ searchTweet }}</pre> -->
-                    <!-- <a v-bind:href="tweet.url" target="_blank">{{ tweet }}</a> -->
-                </li>
-            </ul>
+        <button v-on:click="logout">ログアウト</button>
+        <p class = "count">
+            {{ countSearchTweets }}/{{ countTweets }}
         </p>
         <p>
-            <button v-on:click="logout">ログアウト</button>
+            <ul v-cloak>
+                <li v-for="searchTweet in searchTweets">
+                    <a>{{ searchTweet }}</a>
+                </li>
+            </ul>
         </p>
     </div>
 </template>
@@ -30,10 +29,12 @@ export default{
     data(){
         return{
             message:'',
-            keyword:"",         // 検索用キーワード文字列
-            orgTweets:"",       // サーバーサイドから取得した元データ
-            tweets:[],          // 元データをタブ区切りで格納する配列
-            searchTweets:[]     // キーワード検索結果を格納する配列(ビュー表示はこれを使う)
+            keyword:"",             // 検索用キーワード文字列
+            orgTweets:"",           // サーバーサイドから取得した元データ
+            tweets:[],              // 元データをタブ区切りで格納する配列
+            searchTweets:[],        // キーワード検索結果を格納する配列(ビュー表示はこれを使う)
+            countTweets:0,          // 全件件数
+            countSearchTweets:0     // 検索結果件数
         };
     },
     watch:{
@@ -66,7 +67,7 @@ export default{
                     {
                         params:{
                             uid:this.user.providerData[0].uid,
-                            count:100
+                            count:104       // たぶんヘッダーフッター含めて指定だから調整した値をセット
                         }
                     }
                 )
@@ -88,6 +89,10 @@ export default{
                             vm.tweets[i]
                         )
                     }
+                    vm.countTweets = 0;
+                    vm.countSearchTweets = 0;
+                    vm.countTweets = vm.tweets.length;
+                    vm.countSearchTweets = vm.searchTweets.length;
                 })
         },
         //#endregion サーバーサイドにアクセスしてツイートを取得する。
@@ -108,6 +113,10 @@ export default{
                     this.searchTweets.push(this.tweets[i])
                 }
             }
+            this.countTweets = 0;
+            this.countSearchTweets = 0;
+            this.countTweets = this.tweets.length;
+            this.countSearchTweets = this.searchTweets.length;
         }
         //#endregion お気に入りツイートのキーワード検索
     }
